@@ -12,7 +12,11 @@ attr_reader :check
   end
 
   def dock(bike)
-    @bike = bike
+    if self.check != nil
+      raise 'This docking station is full'
+    else
+      @bike = bike
+    end
   end
 
   def check
