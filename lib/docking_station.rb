@@ -3,23 +3,28 @@
 class DockingStation
 attr_reader :check
 
+  def initialize
+    @bikes = []
+  end
+
+
   def release_bike
-    if self.check == nil
+    if self.check == 0
       raise 'No bikes available'
     else
-      @bike
+      @bikes.pop
     end
   end
 
   def dock(bike)
-    if self.check != nil
+    if self.check >= 20
       raise 'This docking station is full'
     else
-      @bike = bike
+      @bikes << bike
     end
   end
 
   def check
-    @bike
+    @bikes.length
   end
 end
