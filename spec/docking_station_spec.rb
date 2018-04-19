@@ -85,7 +85,7 @@ describe DockingStation do
     end
 
     it 'raises an error when there are no bikes' do
-      expect(subject.release_broken_bikes).to raise_error 
+      expect{subject.release_broken_bikes}.to raise_error 'No bikes available'
     end
   end
 end
