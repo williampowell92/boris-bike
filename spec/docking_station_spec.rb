@@ -92,5 +92,12 @@ describe DockingStation do
       subject.dock(working_bike)
       expect{subject.release_broken_bikes}.to raise_error 'No broken bikes available'
     end
+
+    it 'deletes broken bike among working bikes' do
+      bikes = [working_bike, broken_bike, working_bike]
+      bikes.each { |bike| subject.dock(bike) }
+      expect(subject.release_broken_bikes).to eq [broken_bike]
+      expect(subject.bikes).to eq [working_bike, working_bike]
+    end
   end
 end

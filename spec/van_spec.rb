@@ -7,12 +7,10 @@ describe Van do
 
   it { is_expected.to respond_to(:collect_broken_bikes).with(1).argument }
 
-  describe '#collect_broken_bikes' do
-=begin
+  describe '#collect_broken_bikes', :collect_broken_bikes do
     it 'collects broken bikes from station' do
       subject.collect_broken_bikes(broken_bike_station)
       expect(subject.bikes).to eq [broken_bike]
     end
-=end
   end
 end
