@@ -21,6 +21,7 @@ class DockingStation
   end
 
   def release_broken_bikes
+    raise 'No bikes available' if empty?
     broken_bikes = collate_broken_bikes
     remove_broken_bikes_from_dock
     broken_bikes
