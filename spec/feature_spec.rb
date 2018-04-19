@@ -17,3 +17,11 @@ def report_broken
   bike.report_broken
   bike.broken? == true
 end
+
+def release_broken_bike
+  bike = Bike.new
+  bike.report_broken
+  station = DockingStation.new
+  station.dock(bike)
+  station.release_bike 
+end
