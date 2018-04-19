@@ -1,7 +1,7 @@
 #require_relative 'bike.rb'
 
 class DockingStation
-attr_reader :check
+attr_reader :bikes
 
   def initialize
     @bikes = []
@@ -9,22 +9,13 @@ attr_reader :check
 
 
   def release_bike
-    if self.check == 0
-      raise 'No bikes available'
-    else
-      @bikes.pop
-    end
+    raise 'No bikes available' if bikes == []
+    @bikes.pop
   end
 
   def dock(bike)
-    if self.check >= 20
-      raise 'This docking station is full'
-    else
-      @bikes << bike
-    end
+    raise 'This docking station is full' if bikes.length >= 20
+    @bikes << bike
   end
 
-  def check
-    @bikes.length
-  end
 end

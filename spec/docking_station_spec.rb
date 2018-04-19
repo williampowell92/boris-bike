@@ -1,10 +1,7 @@
 require 'docking_station'
+require 'bike'
 
 describe DockingStation do
-
-  it {is_expected.to respond_to(:release_bike)}
-  it {is_expected.to respond_to(:dock).with(1).argument}
-
 
   it "expects docked bike to be working" do
     bike = Bike.new
@@ -20,7 +17,7 @@ describe DockingStation do
   it 'returns docked bikes' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.check).to eq 1
+    expect(subject.bikes).to eq [bike]
   end
 
   describe "#release_bike" do
