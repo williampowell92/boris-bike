@@ -23,5 +23,5 @@ def release_broken_bike
   bike.report_broken
   station = DockingStation.new
   station.dock(bike)
-  station.release_bike 
+  station.release_bike
 end

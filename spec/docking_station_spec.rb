@@ -40,7 +40,6 @@ describe DockingStation do
       bikes.each { |bike| subject.dock(bike)}
       released_bike = subject.release_bike
       expect(released_bike).to be_working
-
     end
   end
 
