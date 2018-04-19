@@ -1,7 +1,7 @@
 #require_relative 'bike.rb'
 
 class DockingStation
-attr_reader :bikes
+  attr_reader :bikes
 
   def initialize
     @bikes = []
@@ -16,6 +16,8 @@ attr_reader :bikes
     raise 'This docking station is full' if full?
     @bikes << bike
   end
+
+  private
 
   def full?
     bikes.length >= 20
