@@ -7,15 +7,17 @@ attr_reader :bikes
     @bikes = []
   end
 
-
   def release_bike
     raise 'No bikes available' if bikes == []
     @bikes.pop
   end
 
   def dock(bike)
-    raise 'This docking station is full' if bikes.length >= 20
+    raise 'This docking station is full' if full?
     @bikes << bike
   end
 
+  def full?
+    bikes.length >= 20
+  end
 end

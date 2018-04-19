@@ -2,7 +2,6 @@ require 'docking_station'
 require 'bike'
 
 describe DockingStation do
-
   it "expects docked bike to be working" do
     bike = Bike.new
     subject.dock(bike)
@@ -40,5 +39,4 @@ describe DockingStation do
       expect(subject.release_bike).to eq bike
     end
   end
-
 end
