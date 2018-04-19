@@ -1,5 +1,6 @@
 require_relative '../lib/docking_station.rb'
 require_relative '../lib/bike.rb'
+require_relative '../lib/van.rb'
 
 def variable_capacity
   capacity = 30
@@ -37,6 +38,7 @@ end
 def collect_broken_bikes
   station = DockingStation.new
   bike = Bike.new
+  van = Van.new
   bike.report_broken
   station.dock(bike)
   van.collect_broken_bikes(station)
