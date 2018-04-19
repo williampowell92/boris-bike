@@ -21,7 +21,7 @@ class DockingStation
   end
 
   def release_broken_bikes
-    raise 'No bikes available' if empty?
+    raise 'No broken bikes available' if empty? || all_working?
     broken_bikes = collate_broken_bikes
     remove_broken_bikes_from_dock
     broken_bikes
@@ -39,6 +39,10 @@ class DockingStation
 
   def all_broken?
     bikes.all? {|bike| bike.broken? }
+  end
+
+  def all_working?
+    bikes.all? {|bike| bike.working? }
   end
 
   def working_bike_position
