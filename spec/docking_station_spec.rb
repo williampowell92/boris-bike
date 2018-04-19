@@ -77,4 +77,11 @@ describe DockingStation do
       expect(subject.bikes.first).to be_broken
     end
   end
+
+  describe '#release_broken_bikes', :release_broken_bikes do
+    it 'releases broken bikes' do
+      subject.dock(broken_bike)
+      expect(subject.release_broken_bikes).to eq [broken_bike]
+    end
+  end
 end

@@ -20,6 +20,12 @@ class DockingStation
     @bikes << bike
   end
 
+  def release_broken_bikes
+    broken_bikes = collate_broken_bikes
+    remove_broken_bikes_from_dock
+    broken_bikes
+  end
+
   private
 
   def full?
@@ -38,5 +44,13 @@ class DockingStation
     @bikes.each_with_index do |bike, position|
       return position if bike.working?
     end
+  end
+
+  def remove_broken_bikes_from_dock
+    @bikes.reject! { |bike| bike.broken? }
+  end
+
+  def collate_broken_bikes
+    @bikes.select { |bike| bike.broken? }
   end
 end
