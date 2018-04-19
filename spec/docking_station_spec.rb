@@ -32,6 +32,16 @@ describe DockingStation do
       subject.dock(bike)
       expect {subject.release_bike}.to raise_error 'No bikes available'
     end
+
+    it 'releases a working bike among broken bikes' do
+      bikes = Array.new(3) { Bike.new }
+      bikes[2].report_broken
+      bikes[0].report_broken
+      bikes.each { |bike| subject.dock(bike)}
+      released_bike = subject.release_bike
+      expect(released_bike).to be_working
+
+    end
   end
 
   describe "#dock", :dock do
