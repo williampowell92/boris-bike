@@ -2,41 +2,52 @@ require 'docking_station'
 require 'bike'
 
 describe DockingStation do
-  it "expects docked bike to be working" do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(bike).to be_working
+  describe '#initialize', :initialize do
+    it 'Accepts a capacity greater than default capacity' do
+      capacity = 30
+      station = DockingStation.new(capacity)
+      expect(station.capacity).to eq capacity
+    end
+
+    it 'Sets default capacity to 20 when no argument is given' do
+      station = DockingStation.new
+      expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+    end
   end
 
-  it 'docks bike' do
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq [bike]
-  end
-
-  it 'returns docked bikes' do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bikes).to eq [bike]
-  end
-
-  describe "#release_bike" do
+  describe "#release_bike", :release_bike do
     it "raises error message when there is no bikes available" do
       expect {subject.release_bike}.to raise_error('No bikes available')
     end
-  end
 
-  describe "#dock" do
-    it 'raises error message when there is full capacity' do
-      DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
-      expect {subject.dock(Bike.new)}.to raise_error('This docking station is full')
-    end
-  end
-
-  describe "#release_bike" do
     it 'releases a bike' do
       bike = Bike.new
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
+    end
+  end
+
+  describe "#dock", :dock do
+    it "expects docked bike to be working" do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.bikes.first).to be_working
+    end
+
+    it 'docks bike' do
+      bike = Bike.new
+      expect(subject.dock(bike)).to eq [bike]
+    end
+
+    it 'raises error message when there is full capacity' do
+      DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
+      expect {subject.dock(Bike.new)}.to raise_error('This docking station is full')
+    end
+
+    it 'returns docked bikes' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.bikes).to eq [bike]
     end
   end
 end
