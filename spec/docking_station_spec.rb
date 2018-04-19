@@ -21,20 +21,26 @@ describe DockingStation do
     end
 
     it 'releases a bike' do
-      bike = Bike.new
+      bike = double(:bike)
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
 
+    it 'releases working bike' do
+      subject.dock(double(:bike))
+      bike = subject.release_bike
+      expect(bike).to be_working
+    end
+
     it 'wont release broken bikes' do
-      bike = Bike.new
+      bike = double(:bike)
       bike.report_broken
       subject.dock(bike)
       expect {subject.release_bike}.to raise_error 'No bikes available'
     end
 
     it 'releases a working bike among broken bikes' do
-      bikes = Array.new(3) { Bike.new }
+      bikes = Array.new(3) { double(:bike) }
       bikes[2].report_broken
       bikes[0].report_broken
       bikes.each { |bike| subject.dock(bike)}
@@ -45,29 +51,29 @@ describe DockingStation do
 
   describe "#dock", :dock do
     it "expects docked bike to be working" do
-      bike = Bike.new
+      bike = double(:bike)
       subject.dock(bike)
       expect(subject.bikes.first).to be_working
     end
 
     it 'docks bike' do
-      bike = Bike.new
+      bike = double(:bike)
       expect(subject.dock(bike)).to eq [bike]
     end
 
     it 'raises error message when there is full capacity' do
-      DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
-      expect {subject.dock(Bike.new)}.to raise_error('This docking station is full')
+      DockingStation::DEFAULT_CAPACITY.times {subject.dock(double(:bike))}
+      expect {subject.dock(double(:bike))}.to raise_error('This docking station is full')
     end
 
     it 'returns docked bikes' do
-      bike = Bike.new
+      bike = double(:bike)
       subject.dock(bike)
       expect(subject.bikes).to eq [bike]
     end
 
     it 'docks a broken bike' do
-      bike = Bike.new
+      bike = double(:bike)
       bike.report_broken
       subject.dock(bike)
       expect(subject.bikes.first).to be_broken
