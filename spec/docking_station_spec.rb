@@ -1,9 +1,9 @@
 require 'docking_station'
-require 'bike'
 
 describe DockingStation do
   let(:working_bike) { double :bike, working?: true, broken?: false }
   let(:broken_bike) { double :bike, working?: false, broken?: true }
+
   describe '#initialize', :initialize do
     it 'Accepts a capacity greater than default capacity' do
       capacity = 30
@@ -28,7 +28,7 @@ describe DockingStation do
       expect(subject.release_bike).to eq bike
     end
 
-    it 'releases working bike', :double_test do
+    it 'releases working bike' do
       subject.dock(working_bike)
       released_bike = subject.release_bike
       expect(released_bike).to be_working

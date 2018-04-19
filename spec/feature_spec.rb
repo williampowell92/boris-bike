@@ -33,3 +33,11 @@ def accept_broken_bike
   station.dock(bike)
   station.bikes.first.broken?
 end
+
+def collect_broken_bikes
+  station = DockingStation.new
+  bike = Bike.new
+  bike.report_broken
+  station.dock(bike)
+  van.collect_broken_bikes(station)
+end
