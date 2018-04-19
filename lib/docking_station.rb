@@ -8,7 +8,7 @@ attr_reader :bikes
   end
 
   def release_bike
-    raise 'No bikes available' if bikes == []
+    raise 'No bikes available' if empty?
     @bikes.pop
   end
 
@@ -19,5 +19,9 @@ attr_reader :bikes
 
   def full?
     bikes.length >= 20
+  end
+
+  def empty?
+    bikes == []
   end
 end
