@@ -42,7 +42,7 @@ describe DockingStation do
 
     it 'releases a working bike among broken bikes' do
       bikes = [broken_bike, working_bike, broken_bike]
-      bikes.each { |bike| subject.dock(bike)}
+      bikes.each { |bike| subject.dock(bike) }
       released_bike = subject.release_bike
       expect(released_bike).to be_working
     end
